@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %} Register {% endblock %}
+
+{% block main %}
+    <form action="/money" method="post">
+        <div class="mb-3">
+            <input step="0.01" onkeydown="javascript: return event.keyCode == 69 ? false : true"" class="form-control mx-auto w-auto" id="cash" name="cash" placeholder="USD Dollars" type="number" min="1">
+            <p id="money" class="mt-3"></p>
+        </div>
+        <button class="btn btn-primary" type="submit">Add money</button>
+    </form>
+    <script type=text/javascript src="{{url_for('static', filename='money.js') }}"></script>
+{% endblock %}

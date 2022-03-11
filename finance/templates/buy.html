@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %} Buy {% endblock%}
+
+{% block main %}
+    <form action="/buy" method="post">
+        <input type="text" autofocus autocomplete="off" class="form-control mx-auto mb-3 w-auto" placeholder="Stock symbol" name="symbol">
+        <input onkeydown="javascript: return event.keyCode === 8 || event.keyCode === 46 ? true : !isNaN(Number(event.key))"type="number" autocomplete="off" class="form-control mx-auto mb-3 w-auto" placeholder="Shares" name="shares" min="1">
+        <button class="btn btn-primary" type="submit"> Buy </button>
+    </form>
+{% endblock %}

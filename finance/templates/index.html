@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %} Portfolio {% endblock%}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-start"> Symbol </th>
+                <th class="text-start"> Name </th>
+                <th class="text-end"> Shares </th>
+                <th class="text-end"> Price </th>
+                <th class="text-end"> Total </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set total = namespace(value=0) %}
+            {% for dic in transactions %}
+                {% set cash = prices[dic["stock_symbol"]] * dic["shares"] %}
+                <tr>
+                    <td class="text-start">{{ dic["stock_symbol"] }}</td>
+                    <td class="text-start">{{ dic["stock_name"] }}</td>
+                    <form action="/" method="post" id="form" name="form">
+                        <td class="text-end"><p><span class="input-wrap"><span class="width-machine" aria-hidden="true">{{ dic["shares"]}}</span><input id="shares" class="input" value= {{ dic["shares"] }} type="number" name="shares" min="0" onkeydown="javascript: return event.keyCode === 8 ||
+                                                                                                                                                                                                                                event.keyCode === 46 ? true : !isNaN(Number(event.key))"></span></p>
+                        <input type="text" style="display:none; body-size: 12px; " id="my-shares" name="stocks" value={{ dic["stock_symbol"] }}>
+                        </td>
+                    </form>
+                    <td class="text-end">{{ prices[dic["stock_symbol"]] | usd}}</td>
+                    <td class="text-end" id="total" value ={{cash}} >{{ cash | usd }}</td>
+                    <p id="total" style="display:none;">{{cash}}</p>
+                    <p id="price" style="display:none;">{{prices[dic["stock_symbol"]]}}</p>
+                </tr>
+            {% set total.value = total.value + cash %}
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="4"> Cash </td>
+                <td class="border-0 text-end" id="user_cash" id="user_cash"> {{ user_cash | usd}} </td>
+            </tr>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="4"> TOTAL </td>
+                <td class="border-0 text-end"> {{ (user_cash + total.value) | usd}}
+                <p id="f_total" style="display:none">  {{ (user_cash + total.value) }}</p>
+            </tr>
+        </tfoot>
+    </table>
+    <button role="status" name="button" class="btn btn-primary mx-auto" type="submit" id="saveBtn" style="display:none;"> Save Changes </button>
+    <button style="display:none;"class="btn btn-primary" type="button" disabled id="butt">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span class="sr-only">Loading...</span>
+    </button>
+    <script type=text/javascript src="{{url_for('static', filename='index.js') }}"></script>
+{% endblock %}

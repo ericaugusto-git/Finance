@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %} Register {% endblock %}
+
+{% block main %}
+    <div class="alert alert-info" style="margin-top: -3rem !important; width: 100%;" role="alert">
+        Password  must cotain at least <strong>8 characters</strong> with at least <strong>one symbol, one number, and one letter</strong>
+    </div>
+    <form action="/register" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" pattern="^(?=.*[0-9])(?=.*[^\w]).{8}.*$" id="password" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Password (again)" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %} Buy {% endblock%}
+
+{% block main %}
+    <form action="/sell" method="post">
+        <select class="form-select w-auto mx-auto mb-3" name="symbol">
+        <option selected disabled value=None>Stock</option>
+        {% for dic in symbol%}
+            <option value = {{ dic["stock_symbol"] }}> {{dic["stock_symbol"]}} </option>
+        {% endfor %}
+        </select>
+        <input onkeydown="javascript: return event.keyCode === 8 || event.keyCode === 46 ? true : !isNaN(Number(event.key))" type="number" autocomplete="off" class="form-control mx-auto mb-3 w-auto" placeholder="Shares" name="shares">
+        <button class="btn btn-primary" type="submit"> Sell </button>
+    </form>
+{% endblock %}

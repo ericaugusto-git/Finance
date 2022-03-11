@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %} Quoted {% endblock%}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-start"> Symbol </th>
+                <th class="text-end"> Shares </th>
+                <th class="text-end"> Price </th>
+                <th class="text-end"> Transacted </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dic in history %}
+                <tr>
+                    <td class="text-start">{{ dic["symbol"]}}</td>
+                    <td class="text-end">{{ dic["shares"] }}</td>
+                    <td class="text-end">{{ dic["price"] | usd}}</td>
+                    <td class="text-end">{{ dic["time"]}}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
