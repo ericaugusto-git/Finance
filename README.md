@@ -10,6 +10,7 @@ pip install cs50
 pip install Flask
 pip install Flask-Session
 pip install requests
+pip install Werkzeug
 ```
 Após isso você deve definir uma variável global no seu sistema referente a chave da API utilizada pelo programa com o seguinte comando:<br>
 `set API_KEY=pk_e6fde3e1ac674aa88ab20f22e9b9618c` <br>
